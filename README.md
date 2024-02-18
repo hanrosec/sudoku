@@ -27,3 +27,8 @@
 3. Dodać serwer CDN dla plików statycznych
 4. Skonteneryzować projekt?
 5. Zrobić konfigurację produkcyjną
+
+## Uruchamianie
+
+1. Za pierwszym uruchomieniem uruchom skrypt setup.bat (./scripts/setup.bat)
+2. Aby uruchomić aplikację uruchom skrypt run.bat (./scripts/run.bat)

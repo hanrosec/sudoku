@@ -52,7 +52,6 @@ def add_to_leaderboard():
     gdzie score = czas w milisekundach
     """
     if request.method == 'POST':
-        # print(request.get_json(force=True))
         data = request.form
         print(data)
         if data['time'] is None or \
@@ -60,14 +59,12 @@ def add_to_leaderboard():
             data['system_hash'] is None or \
             data['control_hash'] is None:
                 flash("Serwer nie może przetworzyć zapytania")
-                # return Response(status=400)
         else:
             time = data['time']
             user_hash = data['user_hash']
             system_hash = data['system_hash']
             if user_hash != system_hash:
                 flash("Rozwiązanie nie jest prawidłowe")
-                # return Response(status=400)
             else:
                 db = get_db()
                 user_control_hash = data['control_hash']
@@ -79,10 +76,8 @@ def add_to_leaderboard():
                     )
                     db.commit()
                     flash("Zapisano wynik!")
-                    # return Response(status=200)
                 else:
                     flash("Suma kontrolna gry się nie zgadza. Zapytanie prawdopodobnie zostało zmienione")
-                    # return Response(status=400)
         return redirect(url_for("game.leaderboard"))
 
 @bp.route("/leaderboard", methods=('GET', 'POST'))
@@ -90,7 +85,6 @@ def leaderboard():
     if request.method == 'GET':
         db = get_db()
         leaderboard_data = db.execute(
-            # 'SELECT (users.username, leaderboard.score) FROM leaderboard JOIN users ON leaderboard.user_id = users.id ORDER BY score ASC',
             'SELECT users.username, leaderboard.score FROM leaderboard JOIN users ON leaderboard.user_id = users.id ORDER BY score ASC'
         ).fetchall()
         g.leaderboard = [{"username": x['username'], "score": x['score']} for x in leaderboard_data]

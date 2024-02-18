@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Ranking{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>Nazwa użytkownika</th>
+            <th>Wynik</th>
+        </tr>
+        {% for row in g.leaderboard %}
+            {% if row.username == g.user['username'] %}
+                <tr id="marked">
+                    <td>{{ row.username }}</td>
+                    <td>{{ row.score }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>{{ row.username }}</td>
+                    <td>{{ row.score }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+{% endblock %}

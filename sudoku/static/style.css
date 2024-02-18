@@ -1,0 +1,36 @@
+/* 
+TODO zrobić tak, żeby wszystkie komórki w tabeli miały ten sam rozmiar. niezależnie od tego czy mają zawartość czy nie
+TODO weź ogólnie zrób tak, żeby to ładnie wyglądało XDDD
+TODO? ciemny motyw
+*/
+ul {
+    list-style-type: none;
+}
+
+table {
+    table-layout: fixed;
+}
+
+table * {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+td, td * {
+    height: 20px;
+}
+
+tr, tr * {
+    width: 20px;
+}
+
+#marked {
+    background-color: lightpink;
+}
+
+input[type=number] {
+    /* TODO Komórka do której trzeba wpisać liczbę ma mieć czerwoną obramówkę (teraz ma 2 dodatkowe czarna i czerwona)  */
+    border: 2px solid red;
+    appearance: textfield;
+}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Sudoku{% endblock %}</h1>
+    <meta name="g:solution_hash" content="{{ g.solution_hash }}">
+    <meta name="g:parsed_puzzle" content="{{ g.parsed_puzzle }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha512/0.9.0/sha512.min.js"></script>
+    <script src="{{ url_for('static', filename='jquery.redirect.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+    <table>
+        {% for row in g.puzzle %} 
+            <tr>
+                {% for number in row %}
+                    {% if number != 0 %}
+                        <td>{{ number }}</td>
+                    {% else %}
+                        <td><input type="number" name="numer" id="numer" min="1" max="9"></td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    <button onclick="send_to_leaderboard()">Wyślij</button>
+{% endblock %}

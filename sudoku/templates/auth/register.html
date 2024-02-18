@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Rejestracja{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form action="/auth/register" method="post">
+        <label for="username">Nazwa użytkownika</label>
+        <input name="username" class="username" required>
+        <label for="password">Hasło</label>
+        <input type="password" name="password" id="password" required>
+        <input type="submit" value="Zarejestruj">
+    </form>
+{% endblock %}

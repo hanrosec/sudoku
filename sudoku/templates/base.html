@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} - Sudoku</title>
+    <!--? dodac CDN -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<nav>
+    <h1>Sudoku</h1>
+    <ul>
+        {% if g.user %}
+            <h2>{{ g.user['username'] }}</h2>
+            <li><a href="{{ url_for('game.game') }}">Gra</a>
+            <li><a href="{{ url_for('auth.logout') }}">Wylogowanie</a>
+        {% else %}
+            <li><a href="{{ url_for('auth.login') }}">Logowanie</a>
+            <li><a href="{{ url_for('auth.register') }}">Rejestracja</a>
+        {% endif %}
+        <li><a href="{{ url_for('game.leaderboard') }}">Ranking</a></li>
+    </ul>
+</nav>
+<div class="content">
+    <header>
+        {% block header %}{% endblock %}
+    </header>
+    {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+</div>

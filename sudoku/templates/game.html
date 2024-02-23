@@ -9,19 +9,36 @@
     <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 {% endblock %}
 
+
+
 {% block content %}
-    <table>
-        {% for row in g.puzzle %} 
-            <tr>
-                {% for number in row %}
-                    {% if number != 0 %}
-                        <td>{{ number }}</td>
-                    {% else %}
-                        <td><input type="number" name="numer" id="numer" min="1" max="9"></td>
-                    {% endif %}
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    </table>
+    <!-- <div class="big_grid"> -->
+    {% for small_grid in g.puzzle_arr %}
+
+        {% if loop.index0 % 3 == 0 %}
+            {% if loop.index0 != 0 %}
+                </div>
+            {% endif %}
+            <br>
+            <div class="big_row">
+        {% endif %}
+
+        <div class="small_grid">
+            {% for row in small_grid %}
+                <div class="row">
+                    {% for number in row %}
+                        {% if number != 0 %}
+                            <div class="cell">{{ number }}</div>
+                        {% else %}
+                            <div class="cell"><input type="number" name="numer" id="numer" min="1" max="9"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+
+    {% endfor %}
+    </div>
+    <br>
     <button onclick="send_to_leaderboard()">Wyślij</button>
 {% endblock %}

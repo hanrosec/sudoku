@@ -1,13 +1,14 @@
+# Plik zawierający blueprinty związane z grą: game, add_to_leaderbaord
+
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for, Response
+    Blueprint, flash, g, redirect, render_template, request, url_for
 )
-from werkzeug.exceptions import abort
 from hashlib import sha512
 
 from .auth import login_required
 from .db import get_db
 from .sudoku import generate_puzzle, parse_board, DIFFICULTIES
-import json
+import numpy as np
 
 bp = Blueprint('game', __name__, url_prefix="/game")
 
@@ -26,13 +27,21 @@ def game():
             assert diff in DIFFICULTIES
         except AssertionError:
             diff = 1
-        print(diff)
         solution, puzzle = generate_puzzle(difficulty=diff)
+        
+        puzzle_arr = np.array(puzzle)
+        puzzle_arr_splitted = []
+
+        for i in range(0, 9, 3):
+            for j in range(0, 9, 3):
+                puzzle_arr_splitted.append(puzzle_arr[i:i+3, j:j+3])
+                
         solution_hash = sha512(parse_board(solution).encode()).hexdigest()
         parsed_puzzle = parse_board(puzzle)
         g.solution_hash = solution_hash
         g.parsed_puzzle = parsed_puzzle
-        g.puzzle = puzzle
+        # g.puzzle = puzzle
+        g.puzzle_arr = puzzle_arr_splitted
     
     return render_template('game.html')
 

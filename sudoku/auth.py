@@ -8,8 +8,16 @@ from flask import (
 
 from werkzeug.security import check_password_hash, generate_password_hash
 from .db import get_db
+import re
+
 
 bp = Blueprint('auth', __name__, url_prefix="/auth")
+
+def validate_username(username) -> bool:
+    """
+    Nazwa użytkownika musi spełniać regex [A-Za-z0-9]. Przeciwdziałanie sql injection
+    """
+    return bool(re.match("^\w+$", username))
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
@@ -27,10 +35,11 @@ def register():
         elif not password:
             error = "Podaj hasło"
         
+        if not validate_username(username):
+            error = "Nazwa użytkownika nie może zawierać tylko duże i małe litery oraz znak _"
+        
         if error is None:
             try:
-                #! potencjalne SQL injection
-                #TODO stworzyc zasady to tworzenia nazwy uzytkownika
                 db.execute(
                     "INSERT INTO users (username, password) VALUES (?, ?)",
                     (username, generate_password_hash(password))
@@ -54,10 +63,14 @@ def login():
         
         db = get_db()
         error = None
-        #! potencjalne SQL injection
-        user = db.execute(
-            'SELECT * FROM users WHERE username = ?', (username, )
-        ).fetchone()
+                
+        if not validate_username(username):
+            error = "Nazwa użytkownika nie może zawierać tylko duże i małe litery oraz znak _"
+        
+        if error is None:
+            user = db.execute(
+                'SELECT * FROM users WHERE username = ?', (username, )
+            ).fetchone()
         
         if user is None:
             error = 'Niepoprawna nazwa użytkownika'

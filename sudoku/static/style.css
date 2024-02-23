@@ -7,22 +7,25 @@ ul {
     list-style-type: none;
 }
 
-table {
-    table-layout: fixed;
-}
-
-table * {
+.cell {
+    float: left;
     border: 1px solid black;
-    border-collapse: collapse;
     text-align: center;
+    justify-content: center;
+    width: 28px;
+    height: 26px;
 }
 
-td, td * {
-    height: 20px;
+.small_grid {
+    float: left;
+    border: 1px solid blue;
 }
 
-tr, tr * {
-    width: 20px;
+.big_row {
+    /* TODO naprawić to, że każdy big_row ma pod sobą przerwę -> albo dodać przerwę do small_grid albo usunąć z big_row */
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
 }
 
 #marked {
@@ -30,7 +33,8 @@ tr, tr * {
 }
 
 input[type=number] {
-    /* TODO Komórka do której trzeba wpisać liczbę ma mieć czerwoną obramówkę (teraz ma 2 dodatkowe czarna i czerwona)  */
     border: 2px solid red;
     appearance: textfield;
+    width: 20px;
+    height: 20px;
 }

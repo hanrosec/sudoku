@@ -9,7 +9,7 @@ ul {
 
 .cell {
     float: left;
-    border: 1px solid black;
+    border: 1px solid pink;
     text-align: center;
     justify-content: center;
     width: 28px;

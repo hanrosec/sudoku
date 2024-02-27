@@ -21,7 +21,6 @@ def game():
     funkcja wysyla do uzytkownika hash rozwiazanego sudoku i nierozwiazane sudoku (list[list[int]])
     """
     diff = request.args.get('diff', type=int, default=1)
-    print(diff is int)
     if request.method == 'GET':
         try:
             assert diff in DIFFICULTIES
@@ -62,7 +61,6 @@ def add_to_leaderboard():
     """
     if request.method == 'POST':
         data = request.form
-        print(data)
         if data['time'] is None or \
             data['user_hash'] is None or \
             data['system_hash'] is None or \

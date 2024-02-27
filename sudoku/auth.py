@@ -17,7 +17,7 @@ def validate_username(username) -> bool:
     """
     Nazwa użytkownika musi spełniać regex [A-Za-z0-9]. Przeciwdziałanie sql injection
     """
-    return bool(re.match("^\w+$", username))
+    return bool(re.match(r"^\w+$", username))
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
@@ -78,7 +78,7 @@ def login():
             error = 'Niepoprawne hasło'
         
         if error is None:
-            print("Poprawnie zalogowano")
+            print(f"{user['id']} logged in")
             session.clear()
             session['user_id'] = user['id']
             return redirect(url_for('game.game'))

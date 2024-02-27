@@ -17,7 +17,7 @@ def validate_username(username) -> bool:
     """
     Nazwa użytkownika musi spełniać regex [A-Za-z0-9]. Przeciwdziałanie sql injection
     """
-    return bool(re.match(r"^\w+$", username))
+    return bool(re.match(r"^\w+$", username)) and len(username) <= 50
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
@@ -36,7 +36,7 @@ def register():
             error = "Podaj hasło"
         
         if not validate_username(username):
-            error = "Nazwa użytkownika nie może zawierać tylko duże i małe litery oraz znak _"
+            error = "Nazwa użytkownika nie może zawierać tylko duże i małe litery oraz znak '_'. Może najwyżej 50 znaków"
         
         if error is None:
             try:
@@ -71,7 +71,8 @@ def login():
             user = db.execute(
                 'SELECT * FROM users WHERE username = ?', (username, )
             ).fetchone()
-        
+            
+        #! Przy za długiej nazwie użytkownika pojawia się błąd UnboundLocalError
         if user is None:
             error = 'Niepoprawna nazwa użytkownika'
         elif not check_password_hash(user['password'], password):

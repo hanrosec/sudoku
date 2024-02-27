@@ -22,11 +22,11 @@
 
 ## TODO
 
-1. Zrobić ładnego CSSa
-2. Przy tworzeniu użytkownika dodać zabezpieczenie przed SQL injection
-3. Dodać serwer CDN dla plików statycznych
-4. Skonteneryzować projekt?
-5. Zrobić konfigurację produkcyjną
+- [ ] Zrobić ładnego CSSa
+- [x] Przy tworzeniu użytkownika dodać zabezpieczenie przed SQL injection
+- [ ] Dodać serwer CDN dla plików statycznych
+- [ ] Skonteneryzować projekt?
+- [ ] Zrobić konfigurację produkcyjną
 
 ## Uruchamianie
 

@@ -25,6 +25,7 @@ def game():
         try:
             assert diff in DIFFICULTIES
         except AssertionError:
+            flash("Zły poziom trudności (automatycznie wybrano 1)")
             diff = 1
         solution, puzzle = generate_puzzle(difficulty=diff)
         

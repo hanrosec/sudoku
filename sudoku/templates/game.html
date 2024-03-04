@@ -41,4 +41,18 @@
     </div>
     <br>
     <button onclick="send_to_leaderboard()">Wyślij</button>
+    
+    <br>
+
+    <b>Wybierz poziom trudności:</b>
+    <select name="diff" id="diff" onchange="window.document.location.href='?diff='+this.options[this.selectedIndex].value;">
+        <option value="" selected="selected" hidden="hidden">{{ request.args.get('diff') }}</option>
+        {% for i in range(0, 4) %}
+            {% if i != request.args.get('diff') %}
+                <option value="{{ i }}">{{ i }}</option>
+            {% else %}
+                <option selected>{{ i }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
 {% endblock %}

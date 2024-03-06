@@ -5,6 +5,7 @@ import functools
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
+import mariadb
 
 from werkzeug.security import check_password_hash, generate_password_hash
 from .db import get_db
@@ -44,9 +45,8 @@ def register():
                         "INSERT INTO users (username, password) VALUES (?, ?)",
                         (username, generate_password_hash(password))
                     )
-                    db.commit()
-                except db.IntegrityError:
-                    error = f"Użytkownik o nazwie {username} jest już istnieje"
+                except mariadb.IntegrityError:
+                    error = f"Użytkownik o nazwie {username} już istnieje"
                 else:
                     # w przypadku poprawnego zarejestrowania uzytkownik jest przekierowywany na strone logowania
                     return redirect(url_for("auth.login"))
@@ -68,9 +68,15 @@ def login():
             error = "Nazwa użytkownika nie może zawierać tylko duże i małe litery oraz znak _ oraz musi mieć długość mniejszą niż 50 znaków"
         else:
             if error is None:
-                user = db.execute(
+                db.execute(
                     'SELECT * FROM users WHERE username = ?', (username, )
-                ).fetchone()
+                )
+                result = db.fetchone()
+                
+                if result is None:
+                    user = None
+                else:
+                    user = result
                 
             if user is None:
                 error = 'Niepoprawna nazwa użytkownika'
@@ -99,9 +105,14 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-        g.user = get_db().execute(
+        get_db().execute(
             'SELECT * FROM users WHERE id = ?', (user_id,)
-        ).fetchone()
+        )
+        result = get_db().fetchone()
+        if result is None:
+            g.user = None
+        else:
+            g.user = result
 
 # funkcja ktora zapewnia, ze uzytkownik bedzie zalogowany przed dostepem do innych widokow
 def login_required(view):

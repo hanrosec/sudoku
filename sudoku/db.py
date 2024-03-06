@@ -1,15 +1,22 @@
-import sqlite3
+# import sqlite3
+import mariadb
 
 import click
 from flask import current_app, g
 
 def get_db():
     if 'db' not in g:
-        g.db = sqlite3.connect(
-            current_app.config['DATABASE'],
-            detect_types=sqlite3.PARSE_DECLTYPES
+        g.db = mariadb.connect(
+            host=current_app.config['HOST'],
+            port=current_app.config['PORT'],
+            user=current_app.config['USER'],
+            password=current_app.config['PASSWORD'],
+            database=current_app.config['DATABASE'],
+            autocommit=True
         )
-        g.db.row_factory = sqlite3.Row
+        # g.db.row_factory = mariadb.Row
+        g.db = g.db.cursor(dictionary=True)
+        
         
     return g.db
 
@@ -22,8 +29,8 @@ def close_db(e=None):
 def init_db():
     db = get_db()
     
-    with current_app.open_resource('schemas/schema.sqlite') as f:
-        db.executescript(f.read().decode('utf8'))
+    with current_app.open_resource('schemas/schema.sql') as f:
+        db.execute(f.read().decode('utf8'))
 
 @click.command('init-db')
 def init_db_command():

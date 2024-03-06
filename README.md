@@ -25,7 +25,7 @@
 - [ ] Zrobić ładnego CSSa
 - [x] Przy tworzeniu użytkownika dodać zabezpieczenie przed SQL injection
 - [ ] Dodać serwer CDN dla plików statycznych
-- [ ] Skonteneryzować projekt?
+- [x] Skonteneryzować projekt?
 - [ ] Zrobić konfigurację produkcyjną
 
 ## Uruchamianie

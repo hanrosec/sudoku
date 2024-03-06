@@ -1,0 +1,20 @@
+services:
+  app:
+    image: sudoku_app
+    environment:
+      - DB_HOST=maria
+      - DB_PASSWORD=root
+    depends_on:
+      - maria
+    ports:
+      - 5000:5000
+    links:
+      - maria
+    build: sudoku
+  
+  maria:
+    image: sudoku_db
+    environment:
+      - MARIADB_ROOT_PASSWORD=root
+      - MARIADB_DATABASE=sudoku
+    build: db

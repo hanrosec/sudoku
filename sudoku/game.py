@@ -82,7 +82,6 @@ def add_to_leaderboard():
                         'INSERT INTO leaderboard (user_id, score) VALUES (?, ?);',
                         (g.user['id'], time)
                     )
-                    db.commit()
                     flash("Zapisano wynik!")
                 else:
                     flash("Suma kontrolna gry się nie zgadza. Zapytanie prawdopodobnie zostało zmienione")
@@ -92,9 +91,10 @@ def add_to_leaderboard():
 def leaderboard():
     if request.method == 'GET':
         db = get_db()
-        leaderboard_data = db.execute(
+        db.execute(
             'SELECT users.username, leaderboard.score FROM leaderboard JOIN users ON leaderboard.user_id = users.id ORDER BY score ASC'
-        ).fetchall()
+        )
+        leaderboard_data = get_db().fetchone()
         g.leaderboard = [{"username": x['username'], "score": x['score']} for x in leaderboard_data]
         
         return render_template('leaderboard.html')

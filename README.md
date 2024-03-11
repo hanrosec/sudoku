@@ -11,14 +11,10 @@
 
 ## Foldery
 
-- .venv - środowisko wirtualne Pythona
-- .vscode - konfiguracja VScode (można usunąć)
-- instance - folder zawierający pliki związane z tą instancją serwisu
 - sudoku
   - static - statyczne pliki (można zamienić na CDN)
   - templates - szablony stron
     - auth - szablony stron związanych z autoryzacją
-  - test - folder ze skryptami testowymi
 
 ## TODO
 

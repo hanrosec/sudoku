@@ -16,8 +16,6 @@ def create_app(test_config=None):
     except OSError:
         pass
     
-    print(app.config['HOST'])
-    
     from . import db
     db.init_app(app)
     

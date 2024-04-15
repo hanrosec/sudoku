@@ -94,8 +94,9 @@ def leaderboard():
         db.execute(
             'SELECT users.username, leaderboard.score FROM leaderboard JOIN users ON leaderboard.user_id = users.id ORDER BY score ASC'
         )
-        leaderboard_data = get_db().fetchone()
+        leaderboard_data = get_db().fetchall()
         if leaderboard_data is not None:
+            print(leaderboard_data)
             g.leaderboard = [{"username": x['username'], "score": x['score']} for x in leaderboard_data]
         
         return render_template('leaderboard.html')

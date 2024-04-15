@@ -1,6 +1,6 @@
 services:
   app:
-    image: sudoku_app
+    image: app
     environment:
       - DB_HOST=db
       - DB_PASSWORD=root
@@ -13,8 +13,21 @@ services:
     build: sudoku
   
   db:
-    image: sudoku_db
+    image: db
     environment:
       - MARIADB_ROOT_PASSWORD=root
       - MARIADB_DATABASE=sudoku
     build: db
+    
+  nginx:
+    image: nginx
+    restart: always
+    ports:
+      - 80:80
+    build: nginx
+    links:
+      - app
+    depends_on:
+      app:
+        condition: service_started
+        restart: true

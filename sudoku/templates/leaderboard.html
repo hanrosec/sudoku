@@ -1,27 +1,30 @@
 {% extends 'base.html' %}
 
 {% block header %}
+<div class="baner">
     <h1>{% block title %}Ranking{% endblock %}</h1>
+</div>
 {% endblock %}
 
 {% block content %}
-    <table>
-        <tr>
-            <th>Nazwa użytkownika</th>
-            <th>Czas (ms)</th>
-        </tr>
-        {% for row in g.leaderboard %}
-            {% if row.username == g.user['username'] %}
-                <tr id="marked">
-                    <td>{{ row.username }}</td>
-                    <td>{{ row.score }}</td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td>{{ row.username }}</td>
-                    <td>{{ row.score }}</td>
-                </tr>
-            {% endif %}
-        {% endfor %}
-    </table>
+<table>
+    <tr>
+        <th>Nazwa użytkownika</th>
+        <th>Czas (ms)</th>
+    </tr>
+    {% for row in g.leaderboard %}
+        {% if row.username == g.user['username'] %}
+            <tr id="marked">
+                <td>{{ row.username }}</td>
+                <td>{{ row.score }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td>{{ row.username }}</td>
+                <td>{{ row.score }}</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+</table>
+
 {% endblock %}

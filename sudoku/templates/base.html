@@ -9,18 +9,28 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <nav>
-    <h1><a href="{{ url_for('index') }}">Sudoku</a></h1>
-    <ul>
+    <div class="container">
+        <div class="waviy">
+            <span style="--i:1"><a href="{{ url_for('index') }}" class="sudo">S</a></span>
+            <span style="--i:2"><a href="{{ url_for('index') }}" class="sudo">U</a></span>
+            <span style="--i:3"><a href="{{ url_for('index') }}" class="sudo">D</a></span>
+            <span style="--i:4"><a href="{{ url_for('index') }}" class="sudo">O</a></span>
+            <span style="--i:5"><a href="{{ url_for('index') }}" class="sudo">K</a></span>
+            <span style="--i:6"><a href="{{ url_for('index') }}" class="sudo">U</a></span>
+        </div>
+    </div>
+    <ul class="nav">
         {% if g.user %}
             <h2>{{ g.user['username'] }}</h2>
-            <li><a href="{{ url_for('game.game') }}">Gra</a>
-            <li><a href="{{ url_for('auth.logout') }}">Wylogowanie</a>
+            <li><a href="{{ url_for('game.game') }}">Gra</a></li>
+            <li><a href="{{ url_for('auth.logout') }}">Wylogowanie</a></li>
         {% else %}
-            <li><a href="{{ url_for('auth.login') }}">Logowanie</a>
-            <li><a href="{{ url_for('auth.register') }}">Rejestracja</a>
+            <li><a href="{{ url_for('auth.login') }}">Logowanie</a></li>
+            <li><a href="{{ url_for('auth.register') }}">Rejestracja</a></li>
         {% endif %}
         <li><a href="{{ url_for('game.leaderboard') }}">Ranking</a></li>
     </ul>
+    
 </nav>
 <div class="content">
     <header>

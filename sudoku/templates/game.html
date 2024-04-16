@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h1>{% block title %}Sudoku{% endblock %}</h1>
+    <!-- <h1>{% block title %}Sudoku{% endblock %}</h1> -->
     <meta name="g:solution_hash" content="{{ g.solution_hash }}">
     <meta name="g:parsed_puzzle" content="{{ g.parsed_puzzle }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha512/0.9.0/sha512.min.js"></script>
@@ -12,35 +12,35 @@
 
 
 {% block content %}
-    {% for small_grid in g.puzzle_arr %}
-
-        {% if loop.index0 % 3 == 0 %}
-            {% if loop.index0 != 0 %}
-                </div>
+    <div class="content">
+        {% for small_grid in g.puzzle_arr %}
+            {% if loop.index0 % 3 == 0 %}
+                {% if loop.index0 != 0 %}
+                    </div>
+                {% endif %}
+                <br>
+                <div class="big_row">
             {% endif %}
-            <br>
-            <div class="big_row">
-        {% endif %}
 
-        <div class="small_grid">
-            {% for row in small_grid %}
-                <div class="row">
-                    {% for number in row %}
-                        {% if number != 0 %}
-                            <div class="cell">{{ number }}</div>
-                        {% else %}
-                            <div class="cell"><input type="number" name="numer" id="numer" min="1" max="9"></div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            {% endfor %}
-        </div>
+            <div class="small_grid">
+                {% for row in small_grid %}
+                    <div class="row">
+                        {% for number in row %}
+                            {% if number != 0 %}
+                                <div class="cell">{{ number }}</div>
+                            {% else %}
+                                <div class="cell"><input type="number" name="numer" id="numer" min="1" max="9"></div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
 
-    {% endfor %}
+        {% endfor %}
     </div>
     <br>
-    <button onclick="send_to_leaderboard()">Wyślij</button>
-    
+    <button onclick="send_to_leaderboard()" class="button1">Wyślij</button>
+
     <br>
 
     <b>Wybierz poziom trudności:</b>

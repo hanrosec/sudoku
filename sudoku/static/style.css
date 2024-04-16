@@ -1,30 +1,48 @@
-h1 a {
-    color: inherit;
-    text-decoration: inherit;
+*{
+    background-color: beige;
 }
+
+.sudo {
+    color: pink;
+    font-family: 'Trocchi', serif;
+    font-size: 60px;
+    font-weight: bold;
+    line-height: 48px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none; 
+    padding: 10px;
+    margin: 10px;
+}
+
+a:active { text-decoration: none; }
 
 ul {
     list-style-type: none;
 }
 
 .cell {
-    float: left;
+    display: inline-block;
     border: 1px solid pink;
     text-align: center;
-    justify-content: center;
-    width: 28px;
-    height: 26px;
+    width: 35px; 
+    height: 35px; 
+    line-height: 35px;
+    margin-right: 6px; 
+    margin-bottom: 6px; 
+    background-color: #f9e6ea;
 }
 
 .small_grid {
-    float: left;
-    border: 1px solid blue;
+    display: inline-block;
+    border: 1px solid #4D4861;
+    margin-right: 12px;  
+    margin-bottom: 12px;  
 }
 
 .big_row {
-    display: inline-block;
-    padding: 0px;
-    margin: 0px;
+    display: block;
+    margin-bottom: 12px; 
 }
 
 #marked {
@@ -32,14 +50,244 @@ ul {
 }
 
 input[type=number] {
-    border: 2px solid red;
+    border: 2px solid rgb(91, 19, 95);
     appearance: textfield;
-    width: 20px;
-    height: 20px;
+    width: 9px; 
+    height: 9px;
+    padding: 6px; 
 }
+
+
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
+.container {
+    text-align: center;
+}
+
+.waviy {
+  position: relative;
+  /* -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0,0,0,.2)); */
+  font-size: 60px;
+  display: inline-block;
+  text-align: center;
+  
+}
+.waviy span {
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+  animation: waviy 1s infinite;
+  animation-delay: calc(.1s * var(--i));
+  text-align: center;
+  
+}
+@keyframes waviy {
+  0%,40%,100% {
+    transform: translateY(0)
+  }
+  20% {
+    transform: translateY(-20px)
+  }
+}
+
+.wiki {
+    /*dodac margin */
+    padding: 2rem 1rem;
+    border: 1rem solid pink;
+    border-image: repeating-linear-gradient(45deg, transparent, transparent 5px, pink 30px, beige 15px, transparent 16px, transparent 20px) 20/1rem;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
+
+
+@font-face {
+    font-family: 'Rocher';
+    src: url(https://assets.codepen.io/9632/RocherColorGX.woff2) format('woff2');
+}
+
+@font-palette-values Purples {
+    base-font-family: 'Rocher';
+    base-palette: --purple;
+}
+
+.baner {
+    font-family: 'Rocher', sans-serif;
+    @apply --font-Purples; 
+    text-align: center;
+    font-size: 15px;
+}
+
+.logowanie, .rejestracja {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px; 
+    background-color: beige;
+    font-family: Arial, sans-serif;
+}
+
+.ranking {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px; 
+    background-color: beige;
+    font-family: Arial, sans-serif;
+}
+
+form {
+    padding: 20px;
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px grey;
+    width: 300px; 
+}
+
+form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px; 
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 16px; 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+}
+
+input[type="submit"] {
+    width: 100%; 
+    padding: 12px; 
+    background-color: #605770; 
+    color: #fff; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #4D4861; 
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px;
+}
+
+ul.nav {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: #605770; 
+    padding: 10px 20px; 
+}
+
+ul.nav li {
+    display: inline; 
+    margin-right: 10px; 
+}
+
+ul.nav li a {
+    text-decoration: none; 
+    color: #333; 
+    font-weight: bold;
+    transition: color 0.3s ease; 
+    padding: 5px;
+    color: grey;
+}
+
+ul.nav h2 {
+    text-decoration: none; 
+    color: #333; 
+    font-weight: bold;
+    transition: color 0.3s ease; 
+    padding: 5px;
+    color: grey;
+}
+
+ul.nav li a:hover {
+    color: #4D4861;
+    margin-top: 20px; 
+}
+
+table {
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-bottom: 20px;
+}
+
+table th {
+    background-color: #605770; 
+    color: #fff;
+    padding: 10px; 
+    text-align: left; 
+}
+
+table tr {
+    border-bottom: 1px solid #ddd; 
+}
+
+table tr#marked {
+    background-color: lightpink;  
+}
+
+table td {
+    padding: 10px; 
+}
+
+
+.content {
+    text-align: center; 
+}
+
+.button1 {
+  background-color: #605770;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  margin: 0;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #F082AC;
+}
+
+select {
+    padding: 8px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px; 
 }
